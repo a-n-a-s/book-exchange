@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [showAddBookForm, setShowAddBookForm] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [actionableNotifications, setActionableNotifications] = useState([]);
   const [takenBooks, setTakenBooks] = useState([]);
   const [bookData, setBookData] = useState({
     name: "",
@@ -130,18 +131,31 @@ const Dashboard = () => {
     try {
       const db = getFirestore();
       
-      // Fetch notifications where the current user is the owner AND status is pending or returned
-      const notificationsQuery = query(
+      // Fetch all notifications (both pending and returned) for display
+      const allNotificationsQuery = query(
         collection(db, "notifications"), 
         where("ownerId", "==", userId),
         where("status", "in", ["pending", "returned"]) // Include both pending and returned notifications
       );
-      const notificationsSnapshot = await getDocs(notificationsQuery);
-      const notificationsList = [];
-      notificationsSnapshot.forEach((doc) => {
-        notificationsList.push({ id: doc.id, ...doc.data() });
+      const allNotificationsSnapshot = await getDocs(allNotificationsQuery);
+      const allNotificationsList = [];
+      allNotificationsSnapshot.forEach((doc) => {
+        allNotificationsList.push({ id: doc.id, ...doc.data() });
       });
-      setNotifications(notificationsList);
+      setNotifications(allNotificationsList);
+      
+      // Fetch only actionable notifications (only pending) for the counter
+      const actionableNotificationsQuery = query(
+        collection(db, "notifications"), 
+        where("ownerId", "==", userId),
+        where("status", "==", "pending") // Only count pending notifications in counter
+      );
+      const actionableNotificationsSnapshot = await getDocs(actionableNotificationsQuery);
+      const actionableNotificationsList = [];
+      actionableNotificationsSnapshot.forEach((doc) => {
+        actionableNotificationsList.push({ id: doc.id, ...doc.data() });
+      });
+      setActionableNotifications(actionableNotificationsList);
     } catch (error) {
       console.error("Error fetching notifications:", error);
     }
@@ -326,9 +340,9 @@ const Dashboard = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                   </svg>
                   Notifications
-                  {notifications.length > 0 && (
+                  {actionableNotifications.length > 0 && (
                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {notifications.length}
+                      {actionableNotifications.length}
                     </span>
                   )}
                 </button>

@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc, getFirestore, updateDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getFirestore, updateDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { auth } from "./firebase";
 
 // Register user with additional data (name, sem, branch)
@@ -81,6 +81,15 @@ const returnBook = async (bookId, userId) => {
     const db = getFirestore();
     const bookRef = doc(db, "books", bookId);
     
+    // Get the current book data to access the issuedToEmail
+    const bookDoc = await getDoc(bookRef);
+    if (!bookDoc.exists()) {
+      throw new Error("Book not found");
+    }
+    
+    const bookData = bookDoc.data();
+    const requesterEmail = bookData.issuedToEmail || "returned"; // Use the issuedToEmail if available, fallback to "returned"
+    
     // Update the book document to set it as available again and remove the issuedTo field
     await updateDoc(bookRef, {
       available: true,
@@ -89,20 +98,17 @@ const returnBook = async (bookId, userId) => {
     });
     
     // Create a return notification for the book owner
-    const bookDoc = await getDoc(bookRef);
     if (bookDoc.exists()) {
-      const bookData = bookDoc.data();
-      
       // Create a return notification
       await setDoc(doc(db, "notifications", `return_${Date.now()}_${bookId}`), {
         ownerId: bookData.ownerId,
         requesterId: userId,
-        requesterEmail: "returned", // Marking as returned
+        requesterEmail: requesterEmail,
         bookId: bookId,
         bookName: bookData.name,
         bookAuthor: bookData.author,
         status: "returned",
-        requestedAt: new Date()
+        requestedAt: serverTimestamp()
       });
     }
     
