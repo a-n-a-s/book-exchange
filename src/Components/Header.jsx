@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser, isAuthenticated } from "../db/db.action";
 
 const Header = () => {
-  const [authStatus, setAuthStatus] = useState(null); // null = loading, true = authenticated, false = not authenticated
-  // State for dropdown visibility
+  const [authStatus, setAuthStatus] = useState(null); 
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -18,12 +18,12 @@ const Header = () => {
   }, []);
 
   const handleLogin = () => {
-    // Navigate to login page
+    
     navigate('/login');
   };
 
   const handleRegister = () => {
-    // Navigate to register page
+   
     navigate('/register');
   };
 
@@ -31,7 +31,7 @@ const Header = () => {
     await logoutUser();
     setAuthStatus(false);
     setDropdownOpen(false);
-    // Optionally redirect to home page after logout
+    
     navigate('/');
   };
 
@@ -49,17 +49,17 @@ const Header = () => {
       
       <div className="flex items-center">
         {authStatus === null ? (
-          // Loading state
+         
           <div className="text-gray-600">Loading...</div>
         ) : authStatus ? (
-          // User is authenticated
+         
           <div className="relative">
             <button 
               className="bg-transparent border-0 cursor-pointer p-0"
               onClick={toggleDropdown}
             >
               <img 
-                src="https://via.placeholder.com/32" 
+                src="https://imgs.search.brave.com/XFZsS2m9JIJrTs5NWuLWoFJLJSaFgpSt1zgYQDYf1L0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzE2LzA5LzU5LzM3/LzM2MF9GXzE2MDk1/OTM3OTVfQWUxUFBC/Z0dTaXkydEt3NEdX/WGVYSnRCVFFuM2RX/cG4uanBn" 
                 alt="Profile" 
                 className="w-8 h-8 rounded-full object-cover" 
               />

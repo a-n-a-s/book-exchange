@@ -28,7 +28,7 @@ const Login = () => {
       
       if (user) {
         console.log("Login successful:", user);
-        // Redirect to dashboard
+       
         navigate("/dashboard");
       } else {
         alert("Login failed. Please check your credentials and try again.");

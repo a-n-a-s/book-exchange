@@ -37,14 +37,12 @@ const App = () => {
   );
 }
 
-// Protected Route Component
-// Landing Page Component
+
 const LandingPage = () => {
   return (
     <div className="landing-page">
       <Header />
-      
-      {/* Hero Section */}
+   
       <section className="hero-section bg-gradient-to-br from-blue-800 via-blue-700 to-indigo-800 text-white py-24">
         <div className="container mx-auto px-4 text-center max-w-4xl">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -64,7 +62,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+    
       <section className="features-section py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -108,7 +106,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="stats-section bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
@@ -132,13 +129,13 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Benefits Section */}
+
       <section className="benefits-section py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2">
-              <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-96 flex items-center justify-center text-gray-500">
-                Student Collaboration Illustration
+              <div className="bg-gray-200 border-2  rounded-xl w-full h-96 flex items-center justify-center text-gray-500">
+                <img  src="/main.jpg" height={450} width={450} className='w-full' />
               </div>
             </div>
             <div className="lg:w-1/2">
@@ -195,7 +192,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+     
       <section className="cta-section bg-gradient-to-r from-blue-800 to-indigo-800 text-white py-20">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Academic Experience?</h2>

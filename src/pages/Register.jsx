@@ -29,9 +29,9 @@ const Register = () => {
       
       if (user) {
         console.log("Registration successful:", user);
-        // Redirect or show success message
+        
         alert("Registration successful! You can now log in.");
-        // You might want to redirect to login page here
+      
       } else {
         alert("Registration failed. Please try again.");
       }
