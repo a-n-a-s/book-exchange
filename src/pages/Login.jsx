@@ -2,6 +2,41 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from "../db/db.action";
 
+// const Login = () => {
+//   const [formData, setFormData] = useState({
+//     email: "",
+//     password: ""
+//   });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const navigate = useNavigate();
+
+//   const handleChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+    
+//     try {
+//       const { email, password } = formData;
+//       const user = await loginUser(email, password);
+      
+//       if (user) {
+//         console.log("Login successful:", user);
+       
+//         navigate("/dashboard");
+//       } else {
+//         alert("Login failed. Please check your credentials and try again.");
+//       }
+//     } catch (error) {
+//       console.error("Login error:", error);
+
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -42,32 +77,32 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white text-center">
-            <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-            <p className="text-blue-100">Sign in to access your book exchange dashboard</p>
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+          <div className="p-8 pb-0 text-center">
+            <h1 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Welcome Back</h1>
+            <p className="text-slate-500">Sign in to access your book exchange dashboard</p>
           </div>
           
           <div className="p-8">
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email Address</label>
+                <label htmlFor="email" className="block text-slate-700 font-medium mb-2 text-sm">Email Address</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 text-slate-900 placeholder-slate-400"
                   placeholder="Enter your email"
                   required
                 />
               </div>
               
               <div className="mb-6">
-                <label htmlFor="password" className="block text-gray-700 font-medium mb-2">Password</label>
+                <label htmlFor="password" className="block text-slate-700 font-medium mb-2 text-sm">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -75,14 +110,14 @@ const Login = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 pr-12"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 pr-12 text-slate-900 placeholder-slate-400"
                     placeholder="Enter your password"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
                   >
                     {showPassword ? (
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -98,18 +133,18 @@ const Login = () => {
                 </div>
               </div>
               
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center">
                   <input
                     type="checkbox"
                     id="remember"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded"
                   />
-                  <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
+                  <label htmlFor="remember" className="ml-2 block text-sm text-slate-600">
                     Remember me
                   </label>
                 </div>
-                <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
                   Forgot Password?
                 </Link>
               </div>
@@ -117,10 +152,10 @@ const Login = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className={`w-full py-4 px-4 rounded-lg text-white font-semibold transition duration-200 ${
+                className={`w-full py-4 px-4 rounded-xl text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${
                   loading 
-                    ? 'bg-blue-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl'
+                    ? 'bg-slate-400 cursor-not-allowed' 
+                    : 'bg-slate-900 hover:bg-blue-600'
                 }`}
               >
                 {loading ? (
@@ -138,9 +173,9 @@ const Login = () => {
             </form>
             
             <div className="mt-8 text-center">
-              <p className="text-gray-600">
+              <p className="text-slate-500">
                 Don't have an account?{' '}
-                <Link to="/register" className="text-blue-600 hover:text-blue-800 font-semibold">
+                <Link to="/register" className="text-blue-600 hover:text-blue-700 font-semibold">
                   Register here
                 </Link>
               </p>

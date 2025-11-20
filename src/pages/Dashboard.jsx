@@ -318,42 +318,41 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50 pb-20">
      
-      <nav className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-xl">
+      <nav className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-              </svg>
-              <h1 className="text-xl font-bold">Book Exchange Dashboard</h1>
+            <div className="flex items-center space-x-3">
+              <div className="bg-slate-900 text-white p-2 rounded-lg">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <h1 className="text-xl font-bold text-slate-800 tracking-tight">Dashboard</h1>
             </div>
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="relative bg-white bg-opacity-20 text-black px-4 py-2 rounded-lg hover:bg-opacity-30 transition duration-300 flex items-center"
+                  className="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-all duration-200"
                 >
-                  <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                   </svg>
-                  Notifications
                   {actionableNotifications.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center ring-2 ring-white">
                       {actionableNotifications.length}
                     </span>
                   )}
                 </button>
               </div>
+              <div className="h-8 w-px bg-slate-200 mx-2"></div>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center"
+                className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors"
               >
-                <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                </svg>
-                Logout
+                Sign Out
               </button>
             </div>
           </div>
@@ -369,44 +368,82 @@ const Dashboard = () => {
       />
 
     
-      <div className="container mx-auto px-4 py-8">
-        <StatsOverview 
-          myBooks={myBooks} 
-          availableBooks={availableBooks} 
-          takenBooks={takenBooks} 
-        />
+      <div className="container mx-auto px-6 py-10 max-w-7xl">
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Welcome back, {user.displayName || 'Student'}</h2>
+          <p className="text-slate-500 text-lg">Manage your library and discover new books.</p>
+        </div>
 
-        <BookList
-          title="Your Books"
-          icon="book"
-          books={myBooks}
-          type="my"
-          onAddBook={() => setShowAddBookForm(true)}
-          showAddButton={true}
-          user={user}
-          onRequest={requestBook}
-          onReturn={handleReturnBook}
-        />
+        <div className="mb-12">
+          <StatsOverview 
+            myBooks={myBooks} 
+            availableBooks={availableBooks} 
+            takenBooks={takenBooks} 
+          />
+        </div>
 
-        <BookList
-          title="Available Books"
-          icon="available"
-          books={availableBooks}
-          type="available"
-          user={user}
-          onRequest={requestBook}
-          onReturn={handleReturnBook}
-        />
+        <div className="space-y-16">
+          <section>
+            <div className="flex justify-between items-end mb-6 border-b border-slate-200 pb-4">
+              <div>
+                <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                  <span className="w-2 h-8 bg-blue-600 rounded-full"></span>
+                  Your Books
+                </h3>
+              </div>
+              <button 
+                onClick={() => setShowAddBookForm(true)}
+                className="px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Add New Book
+              </button>
+            </div>
+            <BookList
+              books={myBooks}
+              type="my"
+              onAddBook={() => setShowAddBookForm(true)}
+              showAddButton={false} 
+              user={user}
+              onRequest={requestBook}
+              onReturn={handleReturnBook}
+            />
+          </section>
 
-        <BookList
-          title="Taken Books"
-          icon="taken"
-          books={takenBooks}
-          type="taken"
-          user={user}
-          onRequest={requestBook}
-          onReturn={handleReturnBook}
-        />
+          <section>
+            <div className="mb-6 border-b border-slate-200 pb-4">
+              <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                Available for Exchange
+              </h3>
+            </div>
+            <BookList
+              books={availableBooks}
+              type="available"
+              user={user}
+              onRequest={requestBook}
+              onReturn={handleReturnBook}
+            />
+          </section>
+
+          <section>
+            <div className="mb-6 border-b border-slate-200 pb-4">
+              <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <span className="w-2 h-8 bg-purple-500 rounded-full"></span>
+                Books You've Borrowed
+              </h3>
+            </div>
+            <BookList
+              books={takenBooks}
+              type="taken"
+              user={user}
+              onRequest={requestBook}
+              onReturn={handleReturnBook}
+            />
+          </section>
+        </div>
       </div>
       
       <AddBookModal

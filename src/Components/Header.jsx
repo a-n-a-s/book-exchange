@@ -40,58 +40,61 @@ const Header = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-gray-100 shadow">
-      <div className="navbar-brand">
-        <Link to="/" className="text-xl font-bold text-gray-800">
-          <h2>BooksManagement</h2>
-        </Link>
-      </div>
-      
-      <div className="flex items-center">
-        {authStatus === null ? (
-         
-          <div className="text-gray-600">Loading...</div>
-        ) : authStatus ? (
-         
-          <div className="relative">
-            <button 
-              className="bg-transparent border-0 cursor-pointer p-0"
-              onClick={toggleDropdown}
-            >
-              <img 
-                src="https://imgs.search.brave.com/XFZsS2m9JIJrTs5NWuLWoFJLJSaFgpSt1zgYQDYf1L0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzE2LzA5LzU5LzM3/LzM2MF9GXzE2MDk1/OTM3OTVfQWUxUFBC/Z0dTaXkydEt3NEdX/WGVYSnRCVFFuM2RX/cG4uanBn" 
-                alt="Profile" 
-                className="w-8 h-8 rounded-full object-cover" 
-              />
-            </button>
-            {dropdownOpen && (
-              <div className="absolute top-full right-0 bg-white shadow-lg rounded z-10 py-2 mt-1">
-                <button 
-                  className="w-full px-4 py-2 text-left bg-transparent border-0 cursor-pointer hover:bg-gray-100"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          // User is not authenticated - show login/register buttons
-          <div className="flex gap-2">
-            <button 
-              className="px-4 py-2 bg-blue-500 text-white border-0 rounded cursor-pointer text-base"
-              onClick={handleLogin}
-            >
-              Login
-            </button>
-            <button 
-              className="px-4 py-2 bg-green-500 text-white border-0 rounded cursor-pointer text-base"
-              onClick={handleRegister}
-            >
-              Register
-            </button>
-          </div>
-        )}
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="navbar-brand">
+          <Link to="/" className="text-2xl font-bold text-slate-800 tracking-tight hover:text-blue-600 transition-colors">
+            BooksManagement
+          </Link>
+        </div>
+        
+        <div className="flex items-center gap-6">
+          {authStatus === null ? (
+            <div className="text-slate-500 text-sm font-medium animate-pulse">Loading...</div>
+          ) : authStatus ? (
+            <div className="relative group">
+              <button 
+                className="flex items-center gap-3 focus:outline-none"
+                onClick={toggleDropdown}
+              >
+                <span className="hidden md:block text-sm font-medium text-slate-700 group-hover:text-blue-600 transition-colors">My Account</span>
+                <img 
+                  src="https://imgs.search.brave.com/XFZsS2m9JIJrTs5NWuLWoFJLJSaFgpSt1zgYQDYf1L0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzE2LzA5LzU5LzM3/LzM2MF9GXzE2MDk1/OTM3OTVfQWUxUFBC/Z0dTaXkydEt3NEdX/WGVYSnRCVFFuM2RX/cG4uanBn" 
+                  alt="Profile" 
+                  className="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100 group-hover:ring-blue-100 transition-all" 
+                />
+              </button>
+              {dropdownOpen && (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                  <button 
+                    className="w-full px-4 py-2.5 text-left text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors flex items-center gap-2"
+                    onClick={handleLogout}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <button 
+                className="px-5 py-2.5 text-slate-600 font-medium text-sm hover:text-blue-600 transition-colors"
+                onClick={handleLogin}
+              >
+                Log In
+              </button>
+              <button 
+                className="px-5 py-2.5 bg-slate-900 text-white font-medium text-sm rounded-lg hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 hover:shadow-xl hover:-translate-y-0.5"
+                onClick={handleRegister}
+              >
+                Get Started
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

@@ -1,6 +1,47 @@
 import React, { useState } from "react";
 import { registerUser } from "../db/db.action";
 
+// const Register = () => {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     sem: "",
+//     branch: ""
+//   });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const [loading, setLoading] = useState(false);
+
+//   const handleChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+    
+//     try {
+//       const { name, email, password, sem, branch } = formData;
+//       const user = await registerUser(name, email, password, sem, branch);
+      
+//       if (user) {
+//         console.log("Registration successful:", user);
+        
+//         alert("Registration successful! You can now log in.");
+      
+//       } else {
+//         alert("Registration failed. Please try again.");
+//       }
+//     } catch (error) {
+//       console.error("Registration error:", error);
+//     }
+//   }
+
+
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -44,19 +85,19 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white text-center">
-            <h1 className="text-3xl font-bold mb-2">Create Account</h1>
-            <p className="text-blue-100">Join our academic book exchange community</p>
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+          <div className="p-8 pb-0 text-center">
+            <h1 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Create Account</h1>
+            <p className="text-slate-500">Join our academic book exchange community</p>
           </div>
           
           <div className="p-8">
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+                  <label htmlFor="name" className="block text-slate-700 font-medium mb-2 text-sm">
                     Full Name
                   </label>
                   <input
@@ -66,13 +107,13 @@ const Register = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                    placeholder="Enter your full name"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 text-slate-900 placeholder-slate-400"
+                    placeholder="John Doe"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                  <label htmlFor="email" className="block text-slate-700 font-medium mb-2 text-sm">
                     Email Address
                   </label>
                   <input
@@ -82,14 +123,14 @@ const Register = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                    placeholder="Enter your email"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 text-slate-900 placeholder-slate-400"
+                    placeholder="john@example.com"
                   />
                 </div>
               </div>
               
               <div className="mb-6">
-                <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+                <label htmlFor="password" className="block text-slate-700 font-medium mb-2 text-sm">
                   Password
                 </label>
                 <div className="relative">
@@ -100,13 +141,13 @@ const Register = () => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 pr-12"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 pr-12 text-slate-900 placeholder-slate-400"
                     placeholder="Create a strong password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
                   >
                     {showPassword ? (
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -124,56 +165,66 @@ const Register = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="sem" className="block text-gray-700 font-medium mb-2">
+                  <label htmlFor="sem" className="block text-slate-700 font-medium mb-2 text-sm">
                     Semester
                   </label>
-                  <select
-                    id="sem"
-                    name="sem"
-                    value={formData.sem}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  >
-                    <option value="">Select Semester</option>
-                    {[...Array(8)].map((_, i) => (
-                      <option key={i+1} value={i+1}>{i+1}</option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="sem"
+                      name="sem"
+                      value={formData.sem}
+                      onChange={handleChange}
+                      required
+                      className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 text-slate-900 appearance-none"
+                    >
+                      <option value="">Select Semester</option>
+                      {[...Array(8)].map((_, i) => (
+                        <option key={i+1} value={i+1}>{i+1}</option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                  </div>
                 </div>
                 
                 <div>
-                  <label htmlFor="branch" className="block text-gray-700 font-medium mb-2">
+                  <label htmlFor="branch" className="block text-slate-700 font-medium mb-2 text-sm">
                     Branch
                   </label>
-                  <select
-                    id="branch"
-                    name="branch"
-                    value={formData.branch}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  >
-                    <option value="">Select Branch</option>
-                    {['CSE', 'CSM', 'CIC', 'IT', 'AIDS', 'AIML', 'ECE', 'EVL', 'EEE', 'MECH', 'CIVIL', 'CHEM', 'BIOTECH'].map((branch) => (
-                      <option key={branch} value={branch}>{branch}</option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="branch"
+                      name="branch"
+                      value={formData.branch}
+                      onChange={handleChange}
+                      required
+                      className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 text-slate-900 appearance-none"
+                    >
+                      <option value="">Select Branch</option>
+                      {['CSE', 'CSM', 'CIC', 'IT', 'AIDS', 'AIML', 'ECE', 'EVL', 'EEE', 'MECH', 'CIVIL', 'CHEM', 'BIOTECH'].map((branch) => (
+                        <option key={branch} value={branch}>{branch}</option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="mb-6 flex items-start">
+              <div className="mb-8 flex items-start">
                 <div className="flex items-center h-5">
                   <input
                     id="terms"
                     type="checkbox"
                     required
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded"
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="terms" className="text-gray-700">
-                    I agree to the <a href="#" className="text-blue-600 hover:underline">Terms and Conditions</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+                  <label htmlFor="terms" className="text-slate-600">
+                    I agree to the <a href="#" className="text-blue-600 hover:underline font-medium">Terms and Conditions</a> and <a href="#" className="text-blue-600 hover:underline font-medium">Privacy Policy</a>
                   </label>
                 </div>
               </div>
@@ -181,10 +232,10 @@ const Register = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className={`w-full py-4 px-4 rounded-lg text-white font-semibold transition duration-200 ${
+                className={`w-full py-4 px-4 rounded-xl text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${
                   loading 
-                    ? 'bg-blue-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl'
+                    ? 'bg-slate-400 cursor-not-allowed' 
+                    : 'bg-slate-900 hover:bg-blue-600'
                 }`}
               >
                 {loading ? (
@@ -202,9 +253,9 @@ const Register = () => {
             </form>
             
             <div className="mt-8 text-center">
-              <p className="text-gray-600">
+              <p className="text-slate-500">
                 Already have an account?{' '}
-                <a href="/login" className="text-blue-600 hover:text-blue-800 font-semibold">
+                <a href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
                   Sign in here
                 </a>
               </p>
