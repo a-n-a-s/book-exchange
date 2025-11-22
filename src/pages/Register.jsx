@@ -1,46 +1,6 @@
 import React, { useState } from "react";
 import { registerUser } from "../db/db.action";
 
-// const Register = () => {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     sem: "",
-//     branch: ""
-//   });
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-    
-//     try {
-//       const { name, email, password, sem, branch } = formData;
-//       const user = await registerUser(name, email, password, sem, branch);
-      
-//       if (user) {
-//         console.log("Registration successful:", user);
-        
-//         alert("Registration successful! You can now log in.");
-      
-//       } else {
-//         alert("Registration failed. Please try again.");
-//       }
-//     } catch (error) {
-//       console.error("Registration error:", error);
-//     }
-//   }
-
-
 
 const Register = () => {
   const [formData, setFormData] = useState({

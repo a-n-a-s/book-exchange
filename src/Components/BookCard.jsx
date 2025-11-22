@@ -48,13 +48,13 @@ const BookCard = ({
         </div>
       </div>
 
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-4 flex flex-col flex-grow">
         <div className="mb-4 flex-grow">
-          <h3 className="font-bold text-lg text-slate-800 mb-1 leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">{book.name}</h3>
+          <h3 className="font-bold text-base text-slate-800 mb-1 leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">{book.name}</h3>
           <p className="text-slate-500 text-sm font-medium">{book.author}</p>
         </div>
         
-        <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-xs text-slate-500 mb-5 bg-slate-50 p-3 rounded-lg border border-slate-100">
+        <div className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs text-slate-500 mb-4 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
           <div className="flex flex-col">
             <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold">Pages</span>
             <span className="font-medium text-slate-700">{book.pages}</span>
@@ -95,7 +95,7 @@ const BookCard = ({
           {type === 'available' && book.ownerId !== user?.uid && (
             <button 
               onClick={handleRequest}
-              className="w-full py-2.5 bg-slate-900 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center text-sm font-medium group-hover:translate-y-[-2px]"
+              className="w-full py-2 bg-slate-900 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center text-sm font-medium group-hover:translate-y-[-2px]"
             >
               Request Exchange
             </button>
@@ -110,7 +110,7 @@ const BookCard = ({
           {type === 'taken' && (
             <button 
               onClick={handleReturn}
-              className="w-full py-2.5 bg-white border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50 hover:text-blue-600 hover:border-blue-200 transition-all duration-300 flex items-center justify-center text-sm font-medium"
+              className="w-full py-2 bg-white border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50 hover:text-blue-600 hover:border-blue-200 transition-all duration-300 flex items-center justify-center text-sm font-medium"
             >
               Return Book
             </button>

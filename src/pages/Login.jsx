@@ -2,40 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from "../db/db.action";
 
-// const Login = () => {
-//   const [formData, setFormData] = useState({
-//     email: "",
-//     password: ""
-//   });
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-    
-//     try {
-//       const { email, password } = formData;
-//       const user = await loginUser(email, password);
-      
-//       if (user) {
-//         console.log("Login successful:", user);
-       
-//         navigate("/dashboard");
-//       } else {
-//         alert("Login failed. Please check your credentials and try again.");
-//       }
-//     } catch (error) {
-//       console.error("Login error:", error);
-
 
 const Login = () => {
   const [formData, setFormData] = useState({
